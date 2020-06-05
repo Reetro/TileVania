@@ -8,18 +8,22 @@ public class Player : MonoBehaviour
     [Header("Player Movement")]
     [Tooltip("Multiplier for player run speed")]
     [SerializeField] float runSpeed = 5f;
+    [Tooltip("Multiplier for player ladder climb speed")]
+    [SerializeField] float climbSpeed = 5f;
     [Tooltip("Amount to add to player's Y velocity when jumping")]
     [SerializeField] float jumpSpeed = 5f;
 
     Rigidbody2D myRigidBody = null;
     Animator myAnimator = null;
     Collider2D myCollider = null;
+    float defaultGravity = 0f;
 
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<CapsuleCollider2D>();
+        defaultGravity = myRigidBody.gravityScale;
     }
 
     void Update()
@@ -27,6 +31,7 @@ public class Player : MonoBehaviour
         Run();
         FlipSprite();
         Jump();
+        ClimbLadder();
     }
 
     private void Run()
@@ -53,6 +58,26 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void ClimbLadder()
+    {
+        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        {
+            myAnimator.SetBool("Climbing", IsPlayerMovingVertically());
+
+            float controlThrow = CrossPlatformInputManager.GetAxis("Vertical");
+            float moveSpeed = controlThrow * climbSpeed;
+            Vector2 playerVelocity = new Vector2(myRigidBody.velocity.x, moveSpeed);
+
+            myRigidBody.velocity = playerVelocity;
+            myRigidBody.gravityScale = 0f;
+        }
+        else
+        {
+            myRigidBody.gravityScale = defaultGravity;
+            myAnimator.SetBool("Climbing", false);
+        }
+    }
+
     private void FlipSprite()
     {
         if (IsPlayerMovingHorizontaly())
@@ -64,5 +89,10 @@ public class Player : MonoBehaviour
     private bool IsPlayerMovingHorizontaly()
     {
         return Mathf.Abs(myRigidBody.velocity.x) > Mathf.Epsilon;
+    }
+
+    private bool IsPlayerMovingVertically()
+    {
+        return Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon;
     }
 }
