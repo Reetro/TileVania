@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57136082388286821}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7390327, y: -2.045126, z: 54.927734}
+  m_LocalPosition: {x: -4.7390327, y: -2.043126, z: 54.927734}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2260887461816372002}
@@ -196,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3755411602897509049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7390327, y: -2.0451262, z: 54.927734}
+  m_LocalPosition: {x: -4.7390327, y: -2.043126, z: 54.927734}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7540380814871620201}
@@ -713,10 +713,8 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 8211289485800610751, guid: eb03b91324e780e42991a3b379c21353,
-    type: 3}
-  m_AnimatedTarget: {fileID: 8211289485800610721, guid: eb03b91324e780e42991a3b379c21353,
-    type: 3}
+  m_Follow: {fileID: 0}
+  m_AnimatedTarget: {fileID: 0}
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_ChildCameras:
@@ -725,20 +723,20 @@ MonoBehaviour:
   - {fileID: 7051998536973406597}
   m_Instructions:
   - m_FullHash: -1661602188
-    m_VirtualCamera: {fileID: 5374266227857752522}
-    m_ActivateAfter: 0
-    m_MinDuration: 0
-  - m_FullHash: 1581163306
     m_VirtualCamera: {fileID: 6790830073130702164}
     m_ActivateAfter: 4
     m_MinDuration: 0
   - m_FullHash: 1581163306
+    m_VirtualCamera: {fileID: 5374266227857752522}
+    m_ActivateAfter: 0
+    m_MinDuration: 0
+  - m_FullHash: 1734137735
     m_VirtualCamera: {fileID: 7051998536973406597}
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 0.5
+    m_Time: 5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
