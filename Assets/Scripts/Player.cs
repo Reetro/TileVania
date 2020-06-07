@@ -102,6 +102,8 @@ public class Player : MonoBehaviour
             myAnimator.SetTrigger("Die");
 
             myRigidBody.velocity = deathKick;
+
+            isAlive = false;
         }
     }
 
