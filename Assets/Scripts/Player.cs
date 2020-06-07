@@ -12,12 +12,15 @@ public class Player : MonoBehaviour
     [SerializeField] float climbSpeed = 5f;
     [Tooltip("Amount to add to player's Y velocity when jumping")]
     [SerializeField] float jumpSpeed = 5f;
+    [Tooltip("Upon death throw the player into the air with this velocity")]
+    [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
 
     Rigidbody2D myRigidBody = null;
     Animator myAnimator = null;
     CapsuleCollider2D myBodyCollider = null;
     BoxCollider2D myFeet = null;
     float defaultGravity = 0f;
+    bool isAlive = true;
 
     void Start()
     {
@@ -30,10 +33,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Run();
-        FlipSprite();
-        Jump();
-        ClimbLadder();
+        if (isAlive)
+        {
+            Run();
+            FlipSprite();
+            Jump();
+            ClimbLadder();
+            Die();
+        }
     }
 
     private void Run()
@@ -85,6 +92,16 @@ public class Player : MonoBehaviour
         if (IsPlayerMovingHorizontaly())
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
+        }
+    }
+
+    private void Die()
+    {
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        {
+            myAnimator.SetTrigger("Die");
+
+            myRigidBody.velocity = deathKick;
         }
     }
 
