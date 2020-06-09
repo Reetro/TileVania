@@ -104,6 +104,8 @@ public class Player : MonoBehaviour
             myRigidBody.velocity = deathKick;
 
             isAlive = false;
+
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 
